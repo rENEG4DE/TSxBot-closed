@@ -1,0 +1,16 @@
+##CVar dump
+auto_report_exception=true
+brain_beat=1000
+client_login_name=
+client_login_password=
+create_exception_log=true
+debugging=false
+host=
+log_level=finest
+path_ts3server=null
+path_plugins=plugins
+port=10011
+query_nickname=TSXDEFAULTNAME
+suppress_warning_empty_result_set=true
+trap_unused_clients=true
+id_virtual_server=2

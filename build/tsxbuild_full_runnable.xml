@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="full_build" name="Create API, Plugins and Bot">
+    <target name="full_build">
+    	<ant antfile="tsxbuild_apijar_plugins.xml" dir="." target="build_jar_plugin"/>
+    	<ant antfile="tsxbot.xml" dir="." target="create_run_jar"/>
+    </target>
+</project>

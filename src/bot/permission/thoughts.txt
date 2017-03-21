@@ -1,0 +1,23 @@
+- Gedanken zum Permission-system
+
+- Permissions ergeben sich aus 3 (möglichen) Quellen:
+	1.	Server-Gruppen
+	2.	Channel-Gruppen
+	3.	Custom-permissions		(per textdatei)
+	
+- sind mit clients asoziiert
+- werden jedesmal neu kalkuliert, da sie sich im Laufe der Zeit ändern können
+- wird ein permission-check nicht bestanden, 
+	so kann eine Begründung / eine Liste fehlender Permissions ausgelesen werden
+
+- Es muss neben einem permission-datentyp ein Datentyp für die Anforderung von permissions 
+	vereinbart werden.
+	
+	
+- Eine liste (möglicher) permissions
+
+read_cvar
+write_cvar	(include read_cvar)
+operate_plugin	(plugins stoppen/starten)
+operate_bot	(internals des bot verändern)
+admin (alles auf einmal)

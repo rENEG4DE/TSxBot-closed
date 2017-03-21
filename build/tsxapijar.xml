@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="export_api_files" name="Export API package to extern position">
+	<!--ANT 1.7 is required                                        	-->
+	<target name="export_api_files">
+		<!--Clean up												-->
+		<delete includeemptydirs="true" verbose="true" quiet="true">
+			<fileset dir="../build/api" includes="**/*" />
+		</delete>
+
+		<!--Make Dirs 												-->
+		<mkdir dir="../build" />
+		<mkdir dir="../build/api" />
+
+		<!--Create CLASS files										-->
+		<javac sourcepath="" srcdir="../src/api/" destdir="../bin/">
+			<include name="**/*.java" />
+		</javac>
+
+		<!--Create JAR file											-->
+		<jar destfile="../build/api/tsxapi.jar">
+			<fileset dir="../bin/" >
+				<include name="api/**/*.class" />
+			</fileset>
+		</jar>
+	</target>
+</project>

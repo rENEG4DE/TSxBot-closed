@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project TSXBOT with libraries in sub-folder">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard	-->
+    <!--ANT 1.7 is required                                        	-->
+    <target name="create_run_jar">
+    	<!--Clean up												-->
+    	<delete includeemptydirs="true" verbose="true" quiet="true">
+    		<fileset dir="../build/release" includes="**/*"/>
+  		</delete>
+
+    	<!--Make Dirs 												-->
+    	<mkdir dir="../build/release"/>
+    	<mkdir dir="../build/release/log"/>
+    	<mkdir dir="../build/release/lib"/>
+    	<mkdir dir="../build/release/conf"/>
+    	<mkdir dir="../build/release/sounds"/>
+    	<mkdir dir="../build/release/plugins"/>
+    	
+    	<!--Copy extern libs 										-->
+        <copy todir="../build/release/lib" verbose="true">
+    		<fileset dir="../jar">
+      			<include name="*.jar"/>
+    		</fileset>
+  		</copy>
+  		
+  		<!--Copy configs 											-->
+        <copy todir="../build/release/conf" verbose="true">
+    		<fileset dir="../conf">
+      			<include name="*.txt"/>
+    		</fileset>
+  		</copy>
+  		
+		<!--Copy sounds 											-->
+        <copy todir="../build/release/sounds" verbose="true">
+    		<fileset dir="../sounds">
+      			<include name="**/*.mp3"/>
+    		</fileset>
+  		</copy>
+  		
+  		<!--Copy plugins 											-->
+        <copy todir="../build/release/plugins" verbose="true">
+    		<fileset dir="../plugins">
+      			<include name="*/*.jar"/>
+      			<include name="*/*.cfg"/>
+    		</fileset>
+  		</copy>
+    	
+        <!--Create TSxBot-jar 										-->
+        <jar destfile="../build/release/tsxbot.jar">
+            <manifest>
+                <attribute name="Main-Class" value="system.runner.Start"/>
+                <attribute name="Class-Path" value=". lib/freetts.jar lib/en_us.jar lib/cmutimelex.jar lib/cmu_time_awb.jar lib/cmulex.jar lib/cmu_us_kal.jar lib/javazoom.jar lib/jsapi.jar lib/sqlitejdbc-v056.jar lib/stax-1.2.0.jar"/>
+            </manifest>
+            <fileset dir="../bin"/>
+        </jar>
+  		
+    </target>
+</project>

@@ -1,0 +1,95 @@
+repo='/c/Arbeit/project/Skymaster/repo/'
+tssrv='/c/Arbeit/download/bin/teamspeak3-server_win64/'
+alias ls='ls -F --color=auto --show-control-chars'
+alias ll='ls -lrtah'
+alias cdrepo='cd $repo'
+alias cdcont='cdrepo; cd customercode_ow_matchmaking_tscontroller'
+alias cdmast='cdrepo; cd customercode_ow_matchmaking_server'
+alias cdcomm='cdrepo; cd customercode_ow_matchmaking_common'
+alias gitlines='git ls-files | grep .*java | xargs wc -l'
+alias cclines='find . -print -depth | grep java | xargs wc -l'
+alias keytool='C:/Program\ Files/Java/jdk1.8.0_60/bin/keytool.exe'
+alias skytest='curl http://127.0.0.1:8000/session?game=League%20of%20Legends'
+alias tserr='(cd $tssrv/logs && egrep -h "WARNING|ERROR" *.log | sort)'
+alias tslog='(cd $tssrv/logs && cat *.log | sort | tail -50)'
+alias ts0log='(cd $tssrv/logs && cat *0.log | sort | tail -50)'
+alias ga='git add .'
+alias gc='git commit'
+alias gd='git diff'
+alias gl='git log'
+alias gs='git status'
+alias gp='git push'
+alias cdtsx='cd C:/Arbeit/project/TSxBot2/'
+alias d='docker'
+alias dockerlogin="docker login '--email=ulli.gerhard@teamspeak.com' '--username=ulli.gerhard' '--password=f%74^PQuAAfZQKCUe69D' https://docker.int.teamspeak.com/"
+
+{	#define colors
+	red=`tput setaf 1`
+	green=`tput setaf 2`
+	reset=`tput sgr0`
+}
+
+#alias bashrc='vim ~/.bash_profile; source ~/.bash_profile'
+
+thisfile="${HOME}/.bash_profile"
+
+bashrc () {
+	#touch /tmp/checkpoint
+	vim $thisfile
+	#if [ -N ${thisfile} ]
+	#then
+	#echo "File has changed! "
+	#fi	
+	source $thisfile
+	#echo "bash_profile resourced"
+}
+
+dailycommit () {
+	echo "${green}master${reset}"
+	echo "${green}controller${reset}"
+	echo "${green}common${reset}"
+}
+
+gitstatus () {
+	pushd . > /dev/null
+	cdcomm
+	echo "${green}common${reset}"
+	gs
+	cdcont
+	echo "${green}controller${reset}"
+	gs
+	cdmast
+	echo "${green}master${reset}"
+	gs
+	popd > /dev/null
+}
+
+protocomm () {
+	pushd . > /dev/null 
+	cdcomm
+	echo 'Compiling protobuffers'
+	sh ./src/main/protobuf/compile_proto.sh
+	popd > /dev/null
+}
+
+mvncomm () {
+	echo 'Build and install Skymaster-common ...'
+	protocomm
+	pushd . > /dev/null 
+	cdcomm
+	echo 'Cleaning maven repositories'
+	mvn clean --quiet
+	echo 'Installing maven library'
+	mvn install --quiet
+	popd > /dev/null
+	echo '... done!'
+}
+
+parapush () {
+	(cdcont && gp) & (cdmast && gp) & (cdcomm && gp)
+}
+
+dclean () {
+	docker rm -v $(docker ps --filter status=exited -q 2>/dev/null) 2>/dev/null
+	docker rmi $(docker images --filter dangling=true -q 2>/dev/null) 2>/dev/null
+}

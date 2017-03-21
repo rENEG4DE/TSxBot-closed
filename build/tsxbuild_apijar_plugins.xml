@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build_jar_plugin" name="Create API-Jar and Plugins">
+    <target name="build_jar_plugin">
+    	<ant antfile="tsxapijar.xml" dir="." target="export_api_files"/>
+    	<ant antfile="tsxplugin.xml" dir="." target="create_plugin_jars"/>
+    </target>
+</project>

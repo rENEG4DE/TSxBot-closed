@@ -1,0 +1,11 @@
+#These plugins are not loaded (if they exist)
+#AfkMover
+AnimateChannelName
+BannerChanger
+#ChannelAdm
+ChannelControl
+EventConsoleMessages
+ExamplePlugin
+MoveBotBack
+RankSystem
+WelcomeSong

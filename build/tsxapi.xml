@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="export_api_files" name="Export API package to extern position">
+    <!--ANT 1.7 is required                                        	-->
+    <target name="export_api_files">
+    	<!--Clean up												-->
+    	<delete includeemptydirs="true" verbose="true" quiet="true">
+    		<fileset dir="../build/api" includes="**/*"/>
+  		</delete>
+
+    	<!--Make Dirs 												-->
+    	<mkdir dir="../build"/>
+    	<mkdir dir="../build/api"/>
+    	    	
+    	<!--Copy API files											-->
+        <copy todir="../build/api" verbose="true">
+    		<fileset dir="../src/api">
+      			<include name="**/*.java"/>
+    		</fileset>
+  		</copy>  		
+    </target>
+</project>

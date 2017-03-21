@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_plugin_jars" name="Create TsXBot plugins">
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="../devlib/ant-contrib/lib/ant-contrib.jar" />
+		</classpath>
+	</taskdef>
+
+	<path id="api-classpath">
+		<fileset dir="../build/api/" includes="tsxapi.jar" />
+	</path>
+
+	<target name="create_plugin_jars">
+		<foreach target="build_plugin" param="plugin.root">
+			<path>
+				<dirset dir="../plugin_development/">
+					<include name="*" />
+					<exclude name="exclude_from_build" />
+				</dirset>
+			</path>
+		</foreach>
+	</target>
+
+	<target name="build_plugin">
+		<if>
+			<equals arg1="${file.separator}" arg2="\" />
+			<then>
+				<property name="uni.separator" value='\\' />
+			</then>
+			<else>
+				<property name="uni.separator" value="${file.separator}" />
+			</else>
+		</if>
+		
+		<propertyregex property="plugin.name" input="${plugin.root}" regexp=".*${uni.separator}([^${uni.separator}]*)" select="\1" override="true" defaultValue="error" />
+		<property location="${plugin.root}/src/" name="plugin.source" />
+		<property location="${plugin.root}/bin/" name="plugin.binary" />
+		<property location="../plugins/${plugin.name}/" name="plugin.path" />
+		<property location="${plugin.path}/${plugin.name}.jar" name="jar.filepath" />
+
+		<echo message="Now building plugin ${plugin.name}" />
+		<echo message="Source: ${plugin.source}" />
+		<echo message="Destination: ${plugin.binary}" />
+		<echo message="Jar: ${jar.filepath}" />
+
+		<mkdir dir="${plugin.binary}" />
+
+		<delete>
+			<fileset dir="${plugin.binary}">
+				<include name="**/*" />
+			</fileset>
+		</delete>
+
+		<javac includeantruntime="false" sourcepath="" srcdir="${plugin.source}" destdir="${plugin.binary}" encoding="ISO-8859-1" classpathref="api-classpath">
+			<include name="**/*.java" />
+		</javac>
+
+		<delete file="${jar.filepath}" />
+
+		<jar destfile="${jar.filepath}">
+			<fileset dir="${plugin.binary}">
+				<include name="**/*.class" />
+			</fileset>
+		</jar>
+
+		<copy file="${plugin.root}/plugin.cfg" todir="${plugin.path}" failonerror="false" overwrite="true" verbose="false" />
+
+		<echo message="DONE" />
+	</target>
+</project>

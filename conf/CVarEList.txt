@@ -1,0 +1,4 @@
+##unused - virtual E-List is used instead
+#These CVars are not shown on "list cvar"-CTB 
+client_login_name
+client_login_password

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jar/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="jar/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="jar/cmulex.jar"/>
+	<classpathentry kind="lib" path="jar/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="jar/en_us.jar"/>
+	<classpathentry kind="lib" path="jar/freetts.jar"/>
+	<classpathentry kind="lib" path="jar/javazoom.jar"/>
+	<classpathentry kind="lib" path="jar/jsapi.jar"/>
+	<classpathentry kind="lib" path="jar/sqlitejdbc-v056.jar"/>
+	<classpathentry kind="lib" path="devlib/ant-contrib/lib/ant-contrib.jar"/>
+	<classpathentry kind="lib" path="devlib/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+	<classpathentry kind="lib" path="devlib/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
